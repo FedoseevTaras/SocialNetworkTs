@@ -1,40 +1,25 @@
 import React from 'react';
 import s from './Dialogs.module.css'
-import {NavLink} from "react-router-dom";
+import DialogItem from "./DialogItem/DialogItem";
+import Message from './Message/Message';
+import {DialogsPageType} from "../../redux/state";
 
-const Dialogs = () => {
+type DialogsPropsType = {
+    state: DialogsPageType
+}
+
+const Dialogs: React.FC<DialogsPropsType> = (props) => {
+
+    let dialogsElement = props.state.dialogs.map(d => <DialogItem name = {d.name} id = {d.id}/>)
+    let messagesElement = props.state.messages.map(m => <Message message= {m.message} id = {m.id}/>)
     return (
         <div className = {s.dialogs}>
             <div className = {s.dialogsItems}>
-                <div className={s.dialog + " " + s.active }>
-                    <NavLink to='/dialogs/1'>Taras</NavLink>
-                </div>
-                <div className={s.dialog}>
-                    <NavLink to='/dialogs/2'>Victor</NavLink>
-                </div>
-                <div className={s.dialog}>
-                    <NavLink to='/dialogs/3'>Andrey</NavLink>
-                </div>
-                <div className={s.dialog}>
-                    <NavLink to='/dialogs/4'>Petya</NavLink>
-                </div>
-                <div className={s.dialog}>
-                    <NavLink to='/dialogs/5'>Vasya</NavLink>
-                </div>
-                <div className={s.dialog}>
-                    <NavLink to='/dialogs/6'>Stepan</NavLink>
-                </div>
+                {dialogsElement}
+
             </div>
             <div className={s.messages}>
-                <div className={s.message}>
-                    Hi
-                </div>
-                <div className={s.message}>
-                    How is your it-kamasutra
-                </div>
-                <div className={s.message}>
-                    Yo
-                </div>
+                {messagesElement}
             </div>
 
         </div>
