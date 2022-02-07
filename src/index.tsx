@@ -1,11 +1,16 @@
 import React from 'react';
-
 import './index.css';
-
 import reportWebVitals from './reportWebVitals';
 import state from "./redux/state"
+import ReactDOM from 'react-dom';
+import './index.css';
+import App from './App';
+import {addPost, RootStateType, updateNewPostText} from './redux/state'
 
-import {rerenderEntireTree} from "./render";
+
+export let rerenderEntireTree = (state:RootStateType) => {
+    ReactDOM.render(<App state = {state} addPost={addPost} updateNewPostText = {updateNewPostText}/>, document.getElementById('root'));
+}
 
 
 
